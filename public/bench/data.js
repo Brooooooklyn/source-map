@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1621915257393,
+  "lastUpdate": 1621915422206,
   "repoUrl": "https://github.com/Brooooooklyn/source-map",
   "entries": {
     "Parcel sourcemap benchmark": [
@@ -456,6 +456,100 @@ window.BENCHMARK_DATA = {
             "range": "±0.74%",
             "unit": "ops/sec",
             "extra": "83 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "lynweklm@gmail.com",
+            "name": "LongYinan",
+            "username": "Brooooooklyn"
+          },
+          "committer": {
+            "email": "lynweklm@gmail.com",
+            "name": "LongYinan",
+            "username": "Brooooooklyn"
+          },
+          "distinct": true,
+          "id": "8d0311a8228c0a3048c540a1cd443c1fd7c991bb",
+          "message": "Accept cargo clippy suggestions, add clippy check in CI",
+          "timestamp": "2021-05-25T11:59:13+08:00",
+          "tree_id": "5befd47568649ff19f462971aa521f30ffe18994",
+          "url": "https://github.com/Brooooooklyn/source-map/commit/8d0311a8228c0a3048c540a1cd443c1fd7c991bb"
+        },
+        "date": 1621915421303,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "consume#consume vlq mappings",
+            "value": 58117,
+            "range": "±1.33%",
+            "unit": "ops/sec",
+            "extra": "91 samples"
+          },
+          {
+            "name": "consume#consume buffer",
+            "value": 89524,
+            "range": "±2.89%",
+            "unit": "ops/sec",
+            "extra": "87 samples"
+          },
+          {
+            "name": "consume#consume JS Mappings",
+            "value": 41551,
+            "range": "±4.87%",
+            "unit": "ops/sec",
+            "extra": "80 samples"
+          },
+          {
+            "name": "serialize#Save buffer",
+            "value": 233,
+            "range": "±29.68%",
+            "unit": "ops/sec",
+            "extra": "45 samples"
+          },
+          {
+            "name": "serialize#Serialize to vlq",
+            "value": 253,
+            "range": "±2.98%",
+            "unit": "ops/sec",
+            "extra": "86 samples"
+          },
+          {
+            "name": "modify#positive line offset",
+            "value": 82034,
+            "range": "±1.04%",
+            "unit": "ops/sec",
+            "extra": "89 samples"
+          },
+          {
+            "name": "modify#negative line offset",
+            "value": 82419,
+            "range": "±1.04%",
+            "unit": "ops/sec",
+            "extra": "92 samples"
+          },
+          {
+            "name": "modify#positive column offset",
+            "value": 3760559,
+            "range": "±0.52%",
+            "unit": "ops/sec",
+            "extra": "91 samples"
+          },
+          {
+            "name": "modify#negative column offset",
+            "value": 3834563,
+            "range": "±1.21%",
+            "unit": "ops/sec",
+            "extra": "89 samples"
+          },
+          {
+            "name": "append#addSourceMap",
+            "value": 2360055,
+            "range": "±0.25%",
+            "unit": "ops/sec",
+            "extra": "93 samples"
           }
         ]
       }
