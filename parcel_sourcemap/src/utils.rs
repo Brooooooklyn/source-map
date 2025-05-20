@@ -46,8 +46,7 @@ fn get_common_prefix_len<'a>(items: &'a [Cow<'a, [&'a str]>]) -> usize {
 }
 
 fn chunk_path(p: &str) -> Vec<&str> {
-    p
-        .split(&['/', '\\'][..])
+    p.split(&['/', '\\'][..])
         .filter(|x| !x.is_empty() && *x != ".")
         .collect()
 }
@@ -76,7 +75,8 @@ pub fn make_relative_path(base: &str, target: &str) -> String {
             Cow::Borrowed(target_path.as_slice()),
         ];
         let prefix_len = get_common_prefix_len(&items);
-        let mut rel_list: Vec<&str> = std::iter::repeat_n("..", base_dir.len() - prefix_len).collect();
+        let mut rel_list: Vec<&str> =
+            std::iter::repeat_n("..", base_dir.len() - prefix_len).collect();
         rel_list.extend_from_slice(&target_path[prefix_len..]);
         rel_list.join("/")
     }
