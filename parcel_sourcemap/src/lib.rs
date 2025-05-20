@@ -17,17 +17,15 @@ use std::borrow::Cow;
 use std::io;
 
 use rkyv::{
-    archived_root,
-    ser::{
-        serializers::{AlignedSerializer, AllocScratch, CompositeSerializer},
-        Serializer,
-    },
-    AlignedVec, Archive, Deserialize, Infallible, Serialize,
+    api::{high::to_bytes_in, low::from_bytes_unchecked},
+    rancor::Failure,
+    util::AlignedVec,
+    Archive, Deserialize, Serialize,
 };
 
 use vlq_utils::{is_mapping_separator, read_relative_vlq};
 
-#[derive(Archive, Serialize, Deserialize, Debug, Default, Clone)]
+#[derive(Archive, Serialize, Deserialize, Debug, Default, Clone, PartialEq, Eq)]
 pub struct SourceMapInner {
     pub sources: Vec<String>,
     pub sources_content: Vec<String>,
@@ -342,20 +340,13 @@ impl SourceMap {
     // Write the sourcemap instance to a buffer
     pub fn to_buffer(&self, output: &mut AlignedVec) -> Result<(), SourceMapError> {
         output.clear();
-        let mut serializer = CompositeSerializer::new(
-            AlignedSerializer::new(output),
-            AllocScratch::default(),
-            Infallible,
-        );
-        serializer.serialize_value(&self.inner)?;
+        to_bytes_in::<_, Failure>(&self.inner, output)?;
         Ok(())
     }
 
     // Create a sourcemap instance from a buffer
     pub fn from_buffer(project_root: &str, buf: &[u8]) -> Result<SourceMap, SourceMapError> {
-        let archived = unsafe { archived_root::<SourceMapInner>(buf) };
-        // TODO: see if we can use the archived data directly rather than deserializing at all...
-        let inner = archived.deserialize(&mut Infallible)?;
+        let inner = unsafe { from_bytes_unchecked::<SourceMapInner, Failure>(buf) }?;
         Ok(SourceMap {
             project_root: String::from(project_root),
             inner,
