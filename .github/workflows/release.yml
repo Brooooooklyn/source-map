@@ -32,6 +32,9 @@ jobs:
       - name: Setup rust target
         run: rustup target add ${{ matrix.target }}
 
+      - name: enable corepack
+        run: corepack enable
+
       - uses: bahmutov/npm-install@v1
       - name: Transpile JavaScript
         run: yarn run transpile
@@ -64,6 +67,9 @@ jobs:
 
       - name: Setup rust target
         run: rustup target add aarch64-apple-darwin
+
+      - name: enable corepack
+        run: corepack enable
 
       - uses: bahmutov/npm-install@v1
       - name: Transpile JavaScript
@@ -126,7 +132,8 @@ jobs:
 
       - name: Setup rust target
         run: rustup target add ${{ matrix.target }}
-
+      - name: enable corepack
+        run: corepack enable
       - uses: bahmutov/npm-install@v1
       - name: Transpile JavaScript
         run: yarn run transpile
@@ -152,6 +159,8 @@ jobs:
       - build-apple-silicon
     steps:
       - uses: actions/checkout@v4
+      - name: enable corepack
+        run: corepack enable
       - uses: bahmutov/npm-install@v1
       - name: Install wasm-pack
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
@@ -175,6 +184,8 @@ jobs:
     name: Release Rust crate
     steps:
       - uses: actions/checkout@v4
+      - name: enable corepack
+        run: corepack enable
       - uses: bahmutov/npm-install@v1
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable

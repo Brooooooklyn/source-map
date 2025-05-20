@@ -23,7 +23,8 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
-
+      - name: enable corepack
+        run: corepack enable
       - uses: bahmutov/npm-install@v1
       - name: Transpile JavaScript
         run: yarn run transpile
@@ -49,7 +50,8 @@ jobs:
           toolchain: stable
       - name: Install wasm-pack
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
-
+      - name: enable corepack
+        run: corepack enable
       - uses: bahmutov/npm-install@v1
       - name: Transpile JavaScript
         run: yarn run transpile
